@@ -1,113 +1,132 @@
-import Image from 'next/image'
 
-export default function Home() {
+// export default function Home() {
+//   return (
+//     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+//       hi
+//     </main>
+//   )
+// }
+'use client';
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
+import Stats from 'three/addons/libs/stats.module.js';
+
+const page: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const controlsRef = useRef<FirstPersonControls | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const statsRef = useRef<Stats | null>(null);
+  const meshRef = useRef<THREE.Mesh | null>(null);
+  const geometryRef = useRef<THREE.PlaneGeometry | null>(null);
+  const clockRef = useRef<THREE.Clock | null>(null);
+
+  useEffect(() => {
+    const init = () => {
+      cameraRef.current = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
+      cameraRef.current.position.y = 200;
+
+      clockRef.current = new THREE.Clock();
+
+      sceneRef.current = new THREE.Scene();
+      sceneRef.current.background = new THREE.Color('#ffffff');
+      sceneRef.current.fog = new THREE.FogExp2('#b3c7fc', 0.0007);
+
+      geometryRef.current = new THREE.PlaneGeometry(20000, 20000, 128 - 1, 128 - 1);
+      geometryRef.current.rotateX(-Math.PI / 2);
+
+      const position = geometryRef.current.attributes.position;
+      position.usage = THREE.DynamicDrawUsage;
+
+      for (let i = 0; i < position.count; i++) {
+        const y = 35 * Math.sin(i / 2);
+        position.setY(i, y);
+      }
+
+      const texture = new THREE.TextureLoader().load('textures/water.jpg');
+      texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(5, 5);
+      texture.encoding = THREE.sRGBEncoding;
+
+      const material = new THREE.MeshBasicMaterial({ color: '#b3c7fc', map: texture }); 
+
+      meshRef.current = new THREE.Mesh(geometryRef.current, material);
+      sceneRef.current.add(meshRef.current);
+
+      rendererRef.current = new THREE.WebGLRenderer({ antialias: true });
+      rendererRef.current.setPixelRatio(window.devicePixelRatio);
+      rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+      containerRef.current?.appendChild(rendererRef.current.domElement);
+
+      controlsRef.current = new FirstPersonControls(cameraRef.current, rendererRef.current.domElement);
+      controlsRef.current.movementSpeed = 500;
+      controlsRef.current.lookSpeed = 0.1;
+
+      statsRef.current = new Stats();
+      containerRef.current?.appendChild(statsRef.current.dom);
+
+      window.addEventListener('resize', onWindowResize);
+    };
+
+    const onWindowResize = () => {
+      if (cameraRef.current && rendererRef.current) {
+        cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+        cameraRef.current.updateProjectionMatrix();
+
+        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+
+        if (controlsRef.current) {
+          controlsRef.current.handleResize();
+        }
+      }
+    };
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      render();
+      statsRef.current?.update();
+    };
+
+    const render = () => {
+      if (clockRef.current && geometryRef.current && controlsRef.current && rendererRef.current) {
+        const delta = clockRef.current.getDelta();
+        const time = clockRef.current.getElapsedTime() * 10;
+        const position = geometryRef.current.attributes.position;
+
+        for (let i = 0; i < position.count; i++) {
+          const y = 35 * Math.sin(i / 5 + (time + i) / 7);
+          position.setY(i, y);
+        }
+
+        position.needsUpdate = true;
+
+        controlsRef.current.update(delta);
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+      }
+    };
+
+    init();
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', onWindowResize);
+    };
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div>
+      <div id="info">
+        <a href="https://threejs.org" target="_blank" rel="noopener">
+          three.js
+        </a>{' '}
+        - dynamic geometry<br />
+        left click: forward, right click: backward
       </div>
+      <div ref={containerRef}></div>
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default page;
