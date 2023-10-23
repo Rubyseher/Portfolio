@@ -1,14 +1,13 @@
 // import Link from "next/link";
 import React from "react";
 import WorkedIn from "./components/WorkedIn";
-import Nias from "./components/Nias";
+import Isro from "./components/Isro";
 
 function page() {
   return (
     <div>
       <WorkedIn />
-
-      <Nias />
+      <Isro />
     </div>
   );
 }

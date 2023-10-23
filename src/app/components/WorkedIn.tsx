@@ -6,7 +6,6 @@ import './components.css'
 
 const WorkedIn = () => {
   return (
-    <div >
     <div className="scrollmagc_zoomin_container" >
       <Controller>
         <Scene
@@ -25,7 +24,6 @@ const WorkedIn = () => {
           )}
         </Scene>
       </Controller>
-    </div>
     </div>
   );
 };

@@ -1,20 +1,23 @@
-
 .scrollmagc_zoomin_container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align:center;
-      color: white;
-      height: 800px;
-      background-color: rgb(0, 0, 0);
-  }
-  .scrollmagic-zoomin-img {
-      width: 100%;
-  }
-  .starbg{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
   text-align: center;
+  color: white;
+  height: 800px;
+  background-color: rgb(0, 0, 0);
+}
+.scrollmagic-zoomin-img {
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-size: 8vh;
+  margin-top: 50vh;
+}
+.starbg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #000;
   height: 100vh;
   line-height: 100vh;
-  }
+}
