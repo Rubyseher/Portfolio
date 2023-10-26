@@ -6,25 +6,30 @@ import './components.css'
 
 const WorkedIn = () => {
   return (
-    <div className="scrollmagc_zoomin_container" >
-      <Controller>
-        <Scene
-          triggerElement="scrollmagc_zoomin_container"
-          duration={2500}
-          triggerHook={0}
-        >
-          {(progress) => (
-            <Tween
-              to={{ scale: 5, opacity: 0 }}
-              totalProgress={progress}
-              paused
-            >
-              <h1 className="scrollmagic-zoomin-img">Worked In</h1>
-            </Tween>
-          )}
-        </Scene>
-      </Controller>
+    <div className="scrollmagc_zoomin_container">
+      <h1>worked in</h1>
     </div>
+    // <div className="scrollmagc_zoomin_container" >
+    //   <Controller>
+    //     <Scene 
+    //       triggerElement="scrollmagic-zoomin-img"
+    //       duration="100%"
+    //       triggerHook={1}
+    //       pin={true}
+    //       indicators
+    //     >
+    //       {(progress:any) => (
+    //         <Tween
+    //           to={{ scale: 2, opacity: 1 }}
+    //           totalProgress={progress}
+    //           paused
+    //         >
+    //           <h1 className="scrollmagic-zoomin-img">Worked In</h1>
+    //         </Tween>
+    //       )}
+    //     </Scene>
+    //   </Controller>
+    // </div>
   );
 };
 
