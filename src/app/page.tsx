@@ -12,22 +12,27 @@ function page() {
   return (
     <div>
       <Scene pin indicators>
-        <section style={{ height: "100vh" }}>
-          <h1>hi</h1>
+        <section style={{ height: "100vh", fontSize: "7rem", textAlign: "center" }}>
+          <h1>hi<br/>under construction</h1>
         </section>
       </Scene>
-      <Scene pin>
+      <Scene pin indicators duration={600}>
         <section className="scrollmagc_zoomin_container">
           <ScrollTrigger start="10vh center" end="400vh center" scrub={0.3}>
-            <Timeline target={
-            <Fragment>
-              <div style={{display:'block', width:'100%'}}>
-            <h1 className="scrollmagic-zoomin-img">worked in</h1>
-            </div>
-            <Isro/>
-            </Fragment>}>
-              <Tween to={{ transform: "scale(1.5)", opacity: 0,delay:6 }} target={0} ease="elastic.out(0.2,1.2)" />
-              <Tween to={{ transform: "scale(1.5)", opacity: 0 }} target={1} ease="elastic.out(0.2,1.2)" />
+            <Timeline
+              target={
+                <Fragment>
+                  <div style={{ position: "absolute", zIndex: 1, width: "100%" }}>
+                    <h1 className="scrollmagic-zoomin-img">worked in</h1>
+                  </div>
+                  <div style={{ position: "absolute", zIndex: 0, width: "100%" }}>
+                    <Isro />
+                  </div>
+                </Fragment>
+              }
+            >
+              <Tween to={{ transform: "scale(3)", opacity: 0}} target={0} ease="elastic.out(0.2,1.2)" />
+              <Tween from={{opacity: 0 }} to={{opacity: 1 }} target={1} ease="elastic.out(0.2,1.2)" />
 
               {/* <Tween from={{ transform: 'scale(0)', opacity: 1 }} target={1} /> */}
               {/* <Tween to={{ transform: 'scale(8)', opacity: 0 }} target={1} ease="elastic.out(0.2,1.2)" /> */}
