@@ -44,7 +44,7 @@ function page() {
         </section>
       </Scene>
 
-      <Scene pin>
+      <Scene pin indicators>
         <section className="relative">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="waveStyle">
             <path
