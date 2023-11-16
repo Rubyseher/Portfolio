@@ -1,3 +1,4 @@
+"use client";
 import Background from "./StarBackground";
 import Image from 'next/image'
 import './components.css'
