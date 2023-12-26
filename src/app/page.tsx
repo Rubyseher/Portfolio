@@ -6,6 +6,7 @@ import React, { Fragment } from "react";
 import { Controller, Scene } from "react-scrollmagic";
 import { Tween, ScrollTrigger, Timeline } from "react-gsap";
 import Isro from "./components/Isro";
+import JP from "./components/JP";
 import "./components/components.css";
 // import Hackathon from "./components/Hackathon";
 
@@ -14,8 +15,9 @@ function page() {
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
         <section style={{ height: "100vh", fontSize: "7rem", textAlign: "center" }}>
-          <h4>hi</h4>
+        <JP />
         </section>
+       
       </Scene>
 
       <Scene pin indicators>
@@ -24,11 +26,14 @@ function page() {
             <Timeline
               target={
                 <Fragment>
-                  <div style={{ position: "absolute", zIndex: 1, width: "100%" }}>
-                    <h1 className="scrollmagic-zoomin-img">worked in</h1>
-                  </div>
-                  <div style={{ position: "absolute", zIndex: 0, width: "100%" }}>
+                  {/* <div style={{ position: "absolute", zIndex: 1, width: "100%" }}>
+                    <h1 className="scrollmagic-zoomin-img">Interned At</h1>
+                  </div> */}
+                  {/* <div style={{ position: "absolute", zIndex: 0, width: "100%" }}>
                     <Isro />
+                  </div> */}
+                  <div style={{ position: "absolute", zIndex: 3}}>
+                    <JP />
                   </div>
                 </Fragment>
               }
@@ -45,6 +50,7 @@ function page() {
           <Hackathon />
         </section>
       </Scene>
+
     </Controller>
   );
 }
