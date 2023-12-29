@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 import { Controller, Scene } from "react-scrollmagic";
 import { Tween, ScrollTrigger, Timeline } from "react-gsap";
 import Isro from "./components/Isro";
-import JP from "./components/JP";
+import JP from "./components/JP/JP";
 import "./components/components.css";
 // import Hackathon from "./components/Hackathon";
 

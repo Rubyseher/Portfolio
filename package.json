@@ -20,6 +20,7 @@
     "gsap": "^3.12.2",
     "next": "13.4.19",
     "proton-engine": "^5.4.5",
+    "raf-manager": "^0.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-gsap": "^3.2.1",
