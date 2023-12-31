@@ -51,17 +51,17 @@ export default class Particles extends React.Component {
     const emitter = new Proton.Emitter();
     //setRate
     emitter.rate = new Proton.Rate(
-      new Proton.Span(15, 20),
-      new Proton.Span(.04)
+      new Proton.Span(35, 44),
+      new Proton.Span(.03)
     );
     //addInitialize
     emitter.addInitialize(new Proton.Position(new Proton.PointZone(0, 0)));
     emitter.addInitialize(new Proton.Mass(1));
     emitter.addInitialize(new Proton.Radius(1, 3));
-    emitter.addInitialize(new Proton.Life(4));
+    emitter.addInitialize(new Proton.Life(2));
     var imagedata = context.getImageData(
       rect.x,
-      rect.y,
+      rect.y ,
       rect.width,
       rect.height
     );
