@@ -4,7 +4,7 @@ import "./styles.css";
 
 const JP = () => {
     return (
-        <div className="App">
+        <div className='JPContainer'>
           <Particles />
         </div>
       );

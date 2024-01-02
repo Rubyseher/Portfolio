@@ -15,9 +15,8 @@ function page() {
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
         <section style={{ height: "100vh", fontSize: "7rem", textAlign: "center" }}>
-        <JP />
+        <h1>hi</h1>
         </section>
-       
       </Scene>
 
       <Scene pin indicators>
@@ -26,20 +25,21 @@ function page() {
             <Timeline
               target={
                 <Fragment>
-                  {/* <div style={{ position: "absolute", zIndex: 1, width: "100%" }}>
+                  <div style={{ position: "absolute", width: "100%" ,backgroundColor:'black'}}>
                     <h1 className="scrollmagic-zoomin-img">Interned At</h1>
-                  </div> */}
-                  {/* <div style={{ position: "absolute", zIndex: 0, width: "100%" }}>
+                  </div>
+                  <div style={{ position: "absolute",  width: "100%" }} >
                     <Isro />
-                  </div> */}
-                  <div style={{ position: "absolute", zIndex: 3}}>
+                  </div>
+                  <div style={{ position: "absolute", width: "100%", }}>
                     <JP />
                   </div>
                 </Fragment>
               }
             >
-              <Tween to={{ transform: "scale(3)", opacity: 0 }} target={0} ease="elastic.out(0.2,1.2)" />
-              <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={1} ease="elastic.out(0.2,1.2)" />
+              <Tween to={{ transform: "scale(3)", opacity: 0 }} target={0} ease="elastic.out(0.2,0.1)" />
+              <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={1} ease="elastic.out(0.2,0.1)" />
+              <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={2} ease="elastic.out(0.2,0.1)" />
             </Timeline>
           </ScrollTrigger>
         </section>
