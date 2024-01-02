@@ -1,18 +1,15 @@
 .scrollmagc_zoomin_container {
   display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  /* text-align: center; */
   color: white;
   position: relative;
-  height: 100vh;
+  height: 200vh;
   width: 100vw;
   overflow: hidden;
   background-color: rgb(0, 0, 0);
 }
 .scrollmagic-zoomin-img {
   width: 100%;
-background-color: #000;
+  background-color: #000;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   font-size: 8vh;
