@@ -7,7 +7,7 @@ import img from "./img";
 export default class Particles extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(props.scrollCoordinate)
     this.index = 0;
     this.loaded = false;
     this.renderProton = this.renderProton.bind(this);

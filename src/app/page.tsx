@@ -8,9 +8,11 @@ import { Tween, ScrollTrigger, Timeline } from "react-gsap";
 import Isro from "./components/Isro";
 import JP from "./components/JP/JP";
 import "./components/components.css";
-// import Hackathon from "./components/Hackathon";
+import { useWindowScroll } from "@uidotdev/usehooks";
 
 function page() {
+  const [{ x, y }] = useWindowScroll();
+
   return (
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
@@ -32,13 +34,13 @@ function page() {
                     <Isro />
                   </div>
                   <div style={{ position: "absolute", width: "100%", }}>
-                    <JP />
+                    <JP scrollCoordinate={y}/>
                   </div>
                 </Fragment>
               }
             >
               <Tween to={{ transform: "scale(3)", opacity: 0 }} target={0} ease="power3.in(2, 0.5)" />
-              <Tween from={{ opacity: 0 }}to={{ opacity: 1}}  target={1} duration={8} ease="power3.in(2, 0.5)" />
+              <Tween from={{ opacity: 0 }}to={{ opacity: 1}}  target={1} ease="power3.in(2, 0.5)" />
               <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={2} ease="power3.in(2, 0.5)" />
             </Timeline>
           </ScrollTrigger>

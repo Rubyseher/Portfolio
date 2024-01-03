@@ -2,10 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import Particles from "./Particles";
 import "./styles.css";
 
-const JP = () => {
+const JP = ({scrollCoordinate}) => {
     return (
         <div className='JPContainer'>
-          <Particles />
+          <Particles scrollCoordinate={scrollCoordinate}/>
         </div>
       );
 };
