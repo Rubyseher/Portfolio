@@ -17,7 +17,7 @@ function page() {
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
         <section style={{ height: "100vh", fontSize: "7rem", textAlign: "center" }}>
-        <JP scrollCoordinate={y}/>
+        <h1>fjs</h1>
         </section>
       </Scene>
 
