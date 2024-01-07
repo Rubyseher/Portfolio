@@ -119,7 +119,6 @@ export default class Particles extends React.Component {
   renderProton() {
     if (!this.loaded) return;
     this.proton.update();
-    this.proton.stats.update(2);
   }
 
   render() {
