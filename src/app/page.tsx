@@ -8,10 +8,8 @@ import { Tween, ScrollTrigger, Timeline } from "react-gsap";
 import Isro from "./components/Isro";
 import JP from "./components/JP/JP";
 import "./components/components.css";
-import { useWindowScroll } from "@uidotdev/usehooks";
 
 function page() {
-  const [{ x, y }] = useWindowScroll();
 
   return (
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
@@ -34,7 +32,7 @@ function page() {
                     <Isro />
                   </div>
                   <div style={{ position: "absolute", width: "100%", }}>
-                    <JP scrollCoordinate={y}/>
+                    <JP />
                   </div>
                 </Fragment>
               }
