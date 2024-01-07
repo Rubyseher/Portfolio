@@ -7,7 +7,6 @@ import img from "./img";
 export default class Particles extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.scrollCoordinate);
     this.index = 0;
     this.loaded = false;
     this.renderProton = this.renderProton.bind(this);
@@ -16,12 +15,17 @@ export default class Particles extends React.Component {
   handleCanvasInited(canvas) {
     this.loadImage(canvas);
     RAFManager.add(this.renderProton);
-    console.log(this.props.scrollCoordinate);
   }
 
   componentDidUpdate() {
-    console.log("update", this.props.scrollCoordinate);
-
+  if (this.props.scrollCoordinate >=970) {
+      this.randomBehaviour.reset(2, 2, 0.2);
+      this.gravity.reset(0);
+    }
+    else{
+      this.randomBehaviour.reset(50, 50, 0.1);
+      this.gravity.reset(0);
+    }
   }
 
   componentWillUnmount() {
@@ -78,17 +82,6 @@ export default class Particles extends React.Component {
     this.gravity = gravity;
     this.renderer = renderer;
     this.randomBehaviour = randomBehaviour;
-
-    // console.log(this.props.scrollCoordinate);
-
-    // if (this.props.scrollCoordinate == 888) {
-    //   this.randomBehaviour.reset(50, 50, 0.1);
-    //   this.gravity.reset(0);
-    // }
-    // if (this.props.scrollCoordinate == 890) {
-    //   this.randomBehaviour.reset(2, 2, 0.2);
-    //   this.gravity.reset(0);
-    // }
   }
 
   customScaleBehaviour() {
@@ -130,7 +123,6 @@ export default class Particles extends React.Component {
   }
 
   render() {
-    console.log(this.props.scrollCoordinate)
     return (
       <Canvas
         globalCompositeOperation="screen"
