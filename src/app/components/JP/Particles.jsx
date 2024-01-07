@@ -10,6 +10,11 @@ export default class Particles extends React.Component {
     this.index = 0;
     this.loaded = false;
     this.renderProton = this.renderProton.bind(this);
+    this.state = {
+      scrollY: 0,
+    };
+    // Bind the event handler to the class instance
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   handleCanvasInited(canvas) {
@@ -18,7 +23,7 @@ export default class Particles extends React.Component {
   }
 
   componentDidUpdate() {
-  if (this.props.scrollCoordinate >=970) {
+  if (this.state.scrollY >=970) {
       this.randomBehaviour.reset(2, 2, 0.2);
       this.gravity.reset(0);
     }
@@ -27,12 +32,22 @@ export default class Particles extends React.Component {
       this.gravity.reset(0);
     }
   }
-
+  componentDidMount() {
+    // Add scroll event listener when the component mounts
+    window.addEventListener('scroll', this.handleScroll);
+  }
   componentWillUnmount() {
+     window.removeEventListener('scroll', this.handleScroll);
     try {
       RAFManager.remove(this.renderProton);
       this.proton.destroy();
     } catch (e) {}
+  }
+  handleScroll() {
+    // Update the scrollY state with the current scroll position
+    this.setState({
+      scrollY: window.scrollY,
+    });
   }
 
   loadImage(canvas) {
