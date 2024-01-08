@@ -21,7 +21,7 @@ const Hackathon = () => {
           <ScrollTrigger start="-10vh center" end="50vh center" scrub={0.1}>
             <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.1} >
               <SplitChars wrapper={<div style={{ display: 'inline-block', fontSize: '40px',letterSpacing:'1px'}} />}>
-                Participated in
+                Participated in various Hackathons
               </SplitChars>
             </Tween>
           </ScrollTrigger>
