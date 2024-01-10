@@ -21,14 +21,15 @@ const Hackathon = () => {
           <ScrollTrigger start="-10vh center" end="50vh center" scrub={0.1}>
             <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.1}>
               <SplitChars wrapper={<div style={{ display: "inline-block", fontSize: "40px", letterSpacing: "1px" }} />}>
-                Participated in various Hackathons
+                Participated in various Events
               </SplitChars>
             </Tween>
             <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.9} ease="power1.in(0.1, 0.1)">
-              <Image src="/img/FGrid.png" width={400} height={400} alt="isro" />
-              <Image src="/img/SIH.png" width={400} height={400} alt="isro" />
-              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
-              <Image src="/img/jwoc.png" width={400} height={400} alt="isro" />
+              <Image src="/img/FGrid.png" width={200} height={200} alt="isro" />
+              <Image src="/img/SIH.png" width={200} height={200} alt="isro" />
+              <Image src="/img/CFG.jpg" width={200} height={200} alt="isro" />
+              <Image src="/img/jwoc.png" width={200} height={200} alt="isro" />
+              <Image src="/img/LBTC.jpg" width={200} height={200} alt="isro" />
             </Tween>
           </ScrollTrigger>
         </section>
