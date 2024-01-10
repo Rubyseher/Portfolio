@@ -25,10 +25,10 @@ const Hackathon = () => {
               </SplitChars>
             </Tween>
             <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.9} ease="power1.in(0.1, 0.1)">
+              <Image src="/img/FGrid.png" width={400} height={400} alt="isro" />
+              <Image src="/img/SIH.png" width={400} height={400} alt="isro" />
               <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
-              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
-              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
-              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
+              <Image src="/img/jwoc.png" width={400} height={400} alt="isro" />
             </Tween>
           </ScrollTrigger>
         </section>
