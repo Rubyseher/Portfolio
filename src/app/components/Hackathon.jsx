@@ -1,10 +1,10 @@
 "use client";
-import { Scene } from 'react-scrollmagic'
-import { Parallax, Background } from 'react-parallax';
-import { Tween, SplitChars, ScrollTrigger } from 'react-gsap';
-import Image from 'next/image';
-import React from 'react';
-import "./components.css"
+import { Scene } from "react-scrollmagic";
+import { Parallax, Background } from "react-parallax";
+import { Tween, SplitChars, ScrollTrigger } from "react-gsap";
+import Image from "next/image";
+import React from "react";
+import "./components.css";
 
 const Hackathon = () => {
   return (
@@ -19,17 +19,21 @@ const Hackathon = () => {
       <Scene pin>
         <section className="bg-white relative top-60 h-screen text-center">
           <ScrollTrigger start="-10vh center" end="50vh center" scrub={0.1}>
-            <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.1} >
-              <SplitChars wrapper={<div style={{ display: 'inline-block', fontSize: '40px',letterSpacing:'1px'}} />}>
+            <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.1}>
+              <SplitChars wrapper={<div style={{ display: "inline-block", fontSize: "40px", letterSpacing: "1px" }} />}>
                 Participated in various Hackathons
               </SplitChars>
+            </Tween>
+            <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} stagger={0.9} ease="power1.in(0.1, 0.1)">
+              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
+              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
+              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
+              <Image src="/img/CFG.jpg" width={400} height={400} alt="isro" />
             </Tween>
           </ScrollTrigger>
         </section>
       </Scene>
-
     </div>
-
   );
 };
 
