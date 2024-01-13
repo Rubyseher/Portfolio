@@ -8,6 +8,7 @@ import { Tween, ScrollTrigger, Timeline } from "react-gsap";
 import Isro from "./components/Isro";
 import JP from "./components/JP/JP";
 import "./components/components.css";
+import Skills from "./components/Skills";
 
 function page() {
 
@@ -45,11 +46,17 @@ function page() {
         </section>
       </Scene>
 
-      <Scene pin indicators duration={600}>
+      <Scene pin indicators>
+        <section className="relative">
+          <Skills />
+        </section>
+      </Scene>
+
+      {/* <Scene pin indicators duration={600}>
         <section className="relative">
           <Hackathon />
         </section>
-      </Scene>
+      </Scene> */}
 
     </Controller>
   );

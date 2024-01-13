@@ -29,6 +29,7 @@
     "react-particles": "^2.12.2",
     "react-scrollmagic": "^2.3.0",
     "react-starfield-animation": "^1.0.1",
+    "sass": "^1.69.7",
     "scrollmagic": "^2.0.8",
     "stats-js": "^1.0.1",
     "three": "^0.156.0",
