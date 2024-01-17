@@ -15,8 +15,8 @@ function page() {
   return (
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
-        <section style={{ height: "100vh", fontSize: "7rem", textAlign: "center" }}>
-        <h1>fjs</h1>
+        <section style={{ height: "100vh", fontSize: "7rem", alignItems: "center",backgroundColor:'black' }}>
+        <img src="/img/isroLogo2.png"  className="glowing"  alt={""}/>
         </section>
       </Scene>
 
