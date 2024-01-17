@@ -7,8 +7,9 @@
   overflow: hidden;
   background-color: rgb(0, 0, 0);
 }
-.glowing{
-  box-shadow: rgba(72, 135, 202, 0.8) 0 0 90px 33px;
+.glowingLogo{
+  -webkit-filter: drop-shadow(12px 12px 7px rgba(244, 61, 61, 0.5));
+  filter: drop-shadow(12px 12px 7px rgba(222, 52, 52, 0.5));
 }
 .scrollmagic-zoomin-img {
   width: 100%;

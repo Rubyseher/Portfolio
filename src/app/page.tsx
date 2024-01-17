@@ -11,35 +11,35 @@ import "./components/components.css";
 import Skills from "./components/Skills";
 
 function page() {
-
   return (
     <Controller globalSceneOptions={{ triggerHook: "onLeave" }}>
       <Scene pin indicators>
-        <section style={{ height: "100vh", fontSize: "7rem", alignItems: "center",backgroundColor:'black' }}>
-        <img src="/img/isroLogo2.png"  className="glowing"  alt={""}/>
+        <section style={{ height: "100vh", fontSize: "7rem", alignItems: "center", backgroundColor: "black" }}>
+          <img src="/img/react.png" className="glowingLogo" alt={""} />
+          <img src="/img/react.png" alt={""} />
         </section>
       </Scene>
 
       <Scene pin indicators>
         <section className="scrollmagc_zoomin_container">
           <ScrollTrigger start="0vh center" end="200vh center" scrub={0.4}>
-            <Timeline 
+            <Timeline
               target={
                 <Fragment>
-                  <div style={{ position: "absolute", width: "100%" ,backgroundColor:'black', marginTop:'30%'}}>
+                  <div style={{ position: "absolute", width: "100%", backgroundColor: "black", marginTop: "30%" }}>
                     <h1 className="scrollmagic-zoomin-img">Interned At</h1>
                   </div>
-                  <div style={{ position: "absolute",  width: "100%" }} >
+                  <div style={{ position: "absolute", width: "100%" }}>
                     <Isro />
                   </div>
-                  <div style={{ position: "absolute", width: "100%", }}>
+                  <div style={{ position: "absolute", width: "100%" }}>
                     <JP />
                   </div>
                 </Fragment>
               }
             >
               <Tween to={{ transform: "scale(3)", opacity: 0 }} target={0} ease="power3.in(2, 0.5)" />
-              <Tween from={{ opacity: 0 }}to={{ opacity: 1}}  target={1} ease="power3.in(2, 0.5)" />
+              <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={1} ease="power3.in(2, 0.5)" />
               <Tween from={{ opacity: 0 }} to={{ opacity: 1 }} target={2} ease="power3.in(2, 0.5)" />
             </Timeline>
           </ScrollTrigger>
@@ -57,7 +57,6 @@ function page() {
           <Hackathon />
         </section>
       </Scene> */}
-
     </Controller>
   );
 }
