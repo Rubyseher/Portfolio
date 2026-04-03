@@ -1,0 +1,96 @@
+'use client';
+
+import { useRef, useMemo } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import * as THREE from 'three';
+
+const PALETTE = ['#2997ff', '#bf5af2', '#ff375f', '#ffffff', '#64d2ff'];
+
+function MainParticles() {
+  const meshRef = useRef();
+  const { mouse } = useThree();
+
+  const { positions, colors } = useMemo(() => {
+    const N = 3000;
+    const positions = new Float32Array(N * 3);
+    const colors    = new Float32Array(N * 3);
+
+    for (let i = 0; i < N; i++) {
+      positions[i * 3]     = (Math.random() - 0.5) * 240;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 240;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
+
+      const c = new THREE.Color(PALETTE[Math.floor(Math.random() * PALETTE.length)]);
+      colors[i * 3]     = c.r;
+      colors[i * 3 + 1] = c.g;
+      colors[i * 3 + 2] = c.b;
+    }
+    return { positions, colors };
+  }, []);
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    meshRef.current.rotation.y += (mouse.x * 0.35 - meshRef.current.rotation.y) * 0.04;
+    meshRef.current.rotation.x += (-mouse.y * 0.25 - meshRef.current.rotation.x) * 0.04;
+    meshRef.current.rotation.z += 0.0004;
+  });
+
+  return (
+    <points ref={meshRef}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" array={positions} count={3000} itemSize={3} />
+        <bufferAttribute attach="attributes-color"    array={colors}    count={3000} itemSize={3} />
+      </bufferGeometry>
+      <pointsMaterial size={1.1} vertexColors transparent opacity={0.65} sizeAttenuation />
+    </points>
+  );
+}
+
+// Glowing cluster representing a company/tech
+function Cluster({ x, y, z, color }) {
+  const { positions, colors } = useMemo(() => {
+    const N = 45;
+    const positions = new Float32Array(N * 3);
+    const colors    = new Float32Array(N * 3);
+    const c = new THREE.Color(color);
+    for (let i = 0; i < N; i++) {
+      positions[i * 3]     = x + (Math.random() - 0.5) * 14;
+      positions[i * 3 + 1] = y + (Math.random() - 0.5) * 14;
+      positions[i * 3 + 2] = z + (Math.random() - 0.5) * 8;
+      colors[i * 3]     = c.r;
+      colors[i * 3 + 1] = c.g;
+      colors[i * 3 + 2] = c.b;
+    }
+    return { positions, colors };
+  }, [x, y, z, color]);
+
+  return (
+    <points>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" array={positions} count={45} itemSize={3} />
+        <bufferAttribute attach="attributes-color"    array={colors}    count={45} itemSize={3} />
+      </bufferGeometry>
+      <pointsMaterial size={2.8} vertexColors transparent opacity={0.85} sizeAttenuation />
+    </points>
+  );
+}
+
+export default function ParticleScene() {
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 90], fov: 75 }}
+      style={{ position: 'absolute', inset: 0 }}
+      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 2]}
+    >
+      <MainParticles />
+      {/* Glowing clusters — JPMorgan, AWS, React, Kubernetes, Docker */}
+      <Cluster x={-60} y={30}  z={-20} color="#2997ff" />
+      <Cluster x={60}  y={-20} z={-30} color="#ff9900" />
+      <Cluster x={0}   y={50}  z={-10} color="#64d2ff" />
+      <Cluster x={-40} y={-40} z={-15} color="#326ce5" />
+      <Cluster x={70}  y={40}  z={-25} color="#32d74b" />
+      <Cluster x={-70} y={-25} z={-20} color="#bf5af2" />
+    </Canvas>
+  );
+}
