@@ -1,30 +1,29 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const W = 280;
 const H = 280;
-const INTERVAL = 5000;
 const STEP = 6;
-const MAX = 1200;
+const MAX = 700;
 
-// Each function draws white on a black canvas — particles are colored separately
+// Phases and durations (ms)
+const FORM_MS    = 1700;  // particles converge into logo
+const HOLD_MS    = 1100;  // logo displayed
+const SCATTER_MS = 850;   // particles drift apart before next logo
+
+// Each draws white on black — particles are colored per logo
 function drawReact(ctx) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
-
   const cx = W / 2, cy = H / 2;
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 10;
   ctx.fillStyle = '#fff';
-
-  // center dot
   ctx.beginPath();
   ctx.arc(cx, cy, 14, 0, Math.PI * 2);
   ctx.fill();
-
-  // 3 ellipses rotated 60° apart
   [0, 60, 120].forEach(deg => {
     ctx.save();
     ctx.translate(cx, cy);
@@ -40,7 +39,6 @@ function drawJS(ctx) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
-
   ctx.fillStyle = '#fff';
   ctx.font = 'bold 180px monospace';
   ctx.textAlign = 'center';
@@ -48,146 +46,175 @@ function drawJS(ctx) {
   ctx.fillText('JS', W / 2, H / 2 + 10);
 }
 
-function drawDocker(ctx) {
+function drawAWS(ctx) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
-
   ctx.fillStyle = '#fff';
+  ctx.font = 'bold 110px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('AWS', W / 2, H / 2 - 10);
+  // underline arc
   ctx.strokeStyle = '#fff';
-
-  // container grid — 3 rows, increasing columns
-  const bw = 38, bh = 28, gap = 8;
-  const rows = [[1,2],[0,1,2,3],[0,1,2,3,4]];
-  const startY = 32;
-
-  rows.forEach((cols, r) => {
-    const rowW = cols.length * bw + (cols.length - 1) * gap;
-    const startX = (W - rowW) / 2;
-    cols.forEach((_, c) => {
-      const x = startX + c * (bw + gap);
-      const y = startY + r * (bh + gap);
-      ctx.beginPath();
-      ctx.roundRect(x, y, bw, bh, 4);
-      ctx.fill();
-    });
-  });
-
-  // whale body
-  ctx.lineWidth = 9;
+  ctx.lineWidth = 8;
   ctx.lineCap = 'round';
   ctx.beginPath();
-  ctx.arc(W / 2 - 10, 175, 78, Math.PI * 0.15, Math.PI * 0.85);
+  ctx.arc(W / 2, H / 2 + 30, 80, 0.1 * Math.PI, 0.9 * Math.PI);
   ctx.stroke();
+  // arrow tip right
+  ctx.beginPath();
+  ctx.moveTo(W / 2 + 80 * Math.cos(0.9 * Math.PI), H / 2 + 30 + 80 * Math.sin(0.9 * Math.PI));
+  ctx.lineTo(W / 2 + 80 * Math.cos(0.9 * Math.PI) + 14, H / 2 + 30 + 80 * Math.sin(0.9 * Math.PI) - 8);
+  ctx.stroke();
+}
 
-  // spout
-  ctx.lineWidth = 8;
+function drawTS(ctx) {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+  // rounded square background outline
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 10;
+  const pad = 28;
   ctx.beginPath();
-  ctx.moveTo(W / 2 + 62, 155);
-  ctx.quadraticCurveTo(W / 2 + 90, 120, W / 2 + 75, 100);
+  ctx.roundRect(pad, pad, W - pad * 2, H - pad * 2, 28);
   ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(W / 2 + 75, 100);
-  ctx.quadraticCurveTo(W / 2 + 105, 90, W / 2 + 95, 115);
-  ctx.stroke();
-
-  // eye
-  ctx.beginPath();
-  ctx.arc(W / 2 - 40, 168, 5, 0, Math.PI * 2);
-  ctx.fill();
+  // TS text inside
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 120px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TS', W / 2, H / 2 + 6);
 }
 
 const LOGOS = [
   { name: 'React',  color: '#61dafb', draw: drawReact  },
   { name: 'JS',     color: '#f7df1e', draw: drawJS     },
-  { name: 'Docker', color: '#099cec', draw: drawDocker },
+  { name: 'AWS',    color: '#ff9900', draw: drawAWS    },
+  { name: 'TS',     color: '#3178c6', draw: drawTS     },
 ];
 
-function sample(drawFn, existing) {
+function sampleLogo(drawFn) {
   const off = document.createElement('canvas');
   off.width = W; off.height = H;
   const ctx = off.getContext('2d');
   drawFn(ctx);
   const data = ctx.getImageData(0, 0, W, H).data;
-
-  const targets = [];
+  const pts = [];
   for (let y = 0; y < H; y += STEP) {
     for (let x = 0; x < W; x += STEP) {
       const i = (y * W + x) * 4;
-      // bright white pixel
-      if (data[i] > 120 && data[i + 3] > 120) {
-        targets.push({ tx: x, ty: y });
-      }
+      if (data[i] > 120 && data[i + 3] > 120) pts.push({ x, y });
     }
   }
-
-  // shuffle
-  for (let i = targets.length - 1; i > 0; i--) {
+  for (let i = pts.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [targets[i], targets[j]] = [targets[j], targets[i]];
+    [pts[i], pts[j]] = [pts[j], pts[i]];
   }
+  return pts.slice(0, MAX);
+}
 
-  return targets.slice(0, MAX).map((t, i) => ({
-    tx: t.tx,
-    ty: t.ty,
-    x: existing[i] ? existing[i].x : Math.random() * W,
-    y: existing[i] ? existing[i].y : Math.random() * H,
-    vx: existing[i] ? existing[i].vx * 0.3 : 0,
-    vy: existing[i] ? existing[i].vy * 0.3 : 0,
-    size: Math.random() * 1.5 + 0.6,
-  }));
+function randomScatterTarget() {
+  // spread within canvas in loose random cloud
+  return {
+    x: W * 0.1 + Math.random() * W * 0.8,
+    y: H * 0.1 + Math.random() * H * 0.8,
+  };
 }
 
 export default function LogoParticles() {
-  const canvasRef    = useRef(null);
-  const particlesRef = useRef([]);
-  const indexRef     = useRef(0);
-  const animRef      = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    // Initial sample
-    particlesRef.current = sample(LOGOS[0].draw, []);
+    // --- State ---
+    let logoIndex = 0;
+    let phase = 'forming';       // 'forming' | 'holding' | 'scattering'
+    let phaseStart = performance.now();
+    let currentColor = LOGOS[0].color;
 
-    // Cycle logos
-    const timer = setInterval(() => {
-      indexRef.current = (indexRef.current + 1) % LOGOS.length;
-      particlesRef.current = sample(LOGOS[indexRef.current].draw, particlesRef.current);
-    }, INTERVAL);
+    // Initialise particles at random positions, targets = first logo
+    const logoTargets = sampleLogo(LOGOS[0].draw);
+    let particles = logoTargets.map(t => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      tx: t.x,
+      ty: t.y,
+    }));
 
-    // Animation loop
-    const animate = () => {
+    // lerp speed per phase
+    const FORM_EASE    = 0.045;   // smooth convergence, no overshoot
+    const SCATTER_EASE = 0.055;
+
+    let animId;
+
+    const animate = (now) => {
+      const elapsed = now - phaseStart;
+
+      // ---- Phase transitions ----
+      if (phase === 'forming' && elapsed > FORM_MS) {
+        phase = 'holding';
+        phaseStart = now;
+      } else if (phase === 'holding' && elapsed > HOLD_MS) {
+        phase = 'scattering';
+        phaseStart = now;
+        // Give every particle a random scatter destination
+        particles.forEach(p => {
+          const t = randomScatterTarget();
+          p.tx = t.x;
+          p.ty = t.y;
+        });
+      } else if (phase === 'scattering' && elapsed > SCATTER_MS) {
+        // Advance to next logo
+        logoIndex = (logoIndex + 1) % LOGOS.length;
+        currentColor = LOGOS[logoIndex].color;
+        const newTargets = sampleLogo(LOGOS[logoIndex].draw);
+
+        // Reconcile particle count
+        while (particles.length < newTargets.length) {
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            tx: 0, ty: 0,
+          });
+        }
+        particles = particles.slice(0, newTargets.length);
+        newTargets.forEach((t, i) => {
+          particles[i].tx = t.x;
+          particles[i].ty = t.y;
+        });
+
+        phase = 'forming';
+        phaseStart = now;
+      }
+
+      // ---- Draw ----
       ctx.clearRect(0, 0, W, H);
-      const color = LOGOS[indexRef.current].color;
+      const ease = phase === 'scattering' ? SCATTER_EASE : FORM_EASE;
 
-      particlesRef.current.forEach(p => {
-        const dx = p.tx - p.x;
-        const dy = p.ty - p.y;
-        p.vx += dx * 0.014;
-        p.vy += dy * 0.014;
-        p.vx *= 0.88;
-        p.vy *= 0.88;
-        p.x += p.vx;
-        p.y += p.vy;
+      // Fade alpha slightly during scatter for depth
+      const alpha = phase === 'scattering' ? 0.55 : 0.82;
 
-        ctx.globalAlpha = 0.82;
-        ctx.fillStyle = color;
+      particles.forEach(p => {
+        p.x += (p.tx - p.x) * ease;
+        p.y += (p.ty - p.y) * ease;
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = currentColor;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
         ctx.fill();
       });
 
       ctx.globalAlpha = 1;
-      animRef.current = requestAnimationFrame(animate);
+      animId = requestAnimationFrame(animate);
     };
 
-    animRef.current = requestAnimationFrame(animate);
-    return () => {
-      clearInterval(timer);
-      cancelAnimationFrame(animRef.current);
-    };
+    animId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animId);
   }, []);
 
   return (
