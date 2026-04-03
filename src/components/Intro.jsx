@@ -5,10 +5,8 @@ import { useRef, useEffect } from 'react';
 const WORDS = [
   { text: 'I', highlight: false },
   { text: 'build', highlight: false },
-  { text: 'production-grade', highlight: false },
   { text: 'software', highlight: false },
   { text: 'that', highlight: false },
-  { text: 'real', highlight: false },
   { text: 'engineers', highlight: false },
   { text: 'actually', highlight: true },
   { text: 'use', highlight: true },
@@ -19,20 +17,12 @@ const WORDS = [
   { text: 'tools,', highlight: false },
   { text: 'and', highlight: false },
   { text: 'experiences', highlight: false },
-  { text: 'that', highlight: false },
-  { text: 'move', highlight: false },
+  { text: 'moving', highlight: false },
   { text: 'at', highlight: false },
   { text: 'the', highlight: false },
   { text: 'speed', highlight: true },
   { text: 'of', highlight: true },
   { text: 'thought.', highlight: true },
-  { text: 'Based', highlight: false },
-  { text: 'in', highlight: false },
-  { text: 'Bangalore,', highlight: false },
-  { text: 'open', highlight: false },
-  { text: 'to', highlight: false },
-  { text: 'the', highlight: false },
-  { text: 'world.', highlight: false },
 ];
 
 export default function Intro() {

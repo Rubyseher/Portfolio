@@ -11,7 +11,7 @@ function MainParticles() {
   const { mouse } = useThree();
 
   const { positions, colors } = useMemo(() => {
-    const N = 3000;
+    const N = 1200;
     const positions = new Float32Array(N * 3);
     const colors    = new Float32Array(N * 3);
 
@@ -38,8 +38,8 @@ function MainParticles() {
   return (
     <points ref={meshRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" array={positions} count={3000} itemSize={3} />
-        <bufferAttribute attach="attributes-color"    array={colors}    count={3000} itemSize={3} />
+        <bufferAttribute attach="attributes-position" array={positions} count={1200} itemSize={3} />
+        <bufferAttribute attach="attributes-color"    array={colors}    count={1200} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial size={1.1} vertexColors transparent opacity={0.65} sizeAttenuation />
     </points>
@@ -84,13 +84,6 @@ export default function ParticleScene() {
       dpr={[1, 2]}
     >
       <MainParticles />
-      {/* Glowing clusters — JPMorgan, AWS, React, Kubernetes, Docker */}
-      <Cluster x={-60} y={30}  z={-20} color="#2997ff" />
-      <Cluster x={60}  y={-20} z={-30} color="#ff9900" />
-      <Cluster x={0}   y={50}  z={-10} color="#64d2ff" />
-      <Cluster x={-40} y={-40} z={-15} color="#326ce5" />
-      <Cluster x={70}  y={40}  z={-25} color="#32d74b" />
-      <Cluster x={-70} y={-25} z={-20} color="#bf5af2" />
     </Canvas>
   );
 }

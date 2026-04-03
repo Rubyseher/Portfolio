@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import { SiJavascript, SiTypescript, SiReact, SiOpenai, SiFigma } from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
 
 // Three.js Canvas must be dynamic (no SSR)
 const ParticleScene = dynamic(() => import('./ParticleScene'), { ssr: false });
@@ -32,6 +34,36 @@ export default function Hero() {
       {/* R3F Particle Canvas */}
       {mounted && <ParticleScene />}
 
+      {/* Tech stack logos */}
+      {mounted && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+          {[
+            { Icon: SiJavascript, color: '#f7df1e', bg: 'rgba(247,223,30,0.1)',  border: 'rgba(247,223,30,0.25)', top: '22%', left: '14%'  },
+            { Icon: SiOpenai,     color: '#bf5af2', bg: 'rgba(191,90,242,0.08)', border: 'rgba(191,90,242,0.22)', top: '44%', left: '9%'   },
+            { Icon: SiTypescript, color: '#3178c6', bg: 'rgba(49,120,198,0.1)',  border: 'rgba(49,120,198,0.25)', top: '64%', left: '14%'  },
+            { Icon: SiReact,      color: '#61dafb', bg: 'rgba(97,218,251,0.08)', border: 'rgba(97,218,251,0.22)', top: '20%', right: '14%' },
+            { Icon: SiFigma,      color: '#ff7262', bg: 'rgba(255,114,98,0.08)', border: 'rgba(255,114,98,0.22)', top: '44%', right: '9%'  },
+            { Icon: FaAws,        color: '#ff9900', bg: 'rgba(255,153,0,0.1)',   border: 'rgba(255,153,0,0.25)',  top: '66%', right: '14%' },
+          ].map(({ Icon, color, bg, border, ...pos }) => (
+            <div
+              key={color}
+              style={{
+                position: 'absolute', ...pos,
+                padding: '0.7rem',
+                background: bg,
+                border: `1px solid ${border}`,
+                borderRadius: '50%',
+                boxShadow: `0 0 24px ${color}33`,
+                backdropFilter: 'blur(4px)',
+                display: 'flex',
+              }}
+            >
+              <Icon size={56} color={color} />
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Radial vignette */}
       <div
         style={{
@@ -47,30 +79,6 @@ export default function Hero() {
         animate="visible"
         style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 2rem' }}
       >
-        {/* Badge */}
-        <motion.div variants={itemVariants} style={{ marginBottom: '2rem' }}>
-          <span
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.4rem 1.1rem',
-              background: 'rgba(41,151,255,0.1)',
-              border: '1px solid rgba(41,151,255,0.28)',
-              borderRadius: '100px',
-              fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em',
-              textTransform: 'uppercase', color: '#2997ff',
-            }}
-          >
-            <span
-              className="badge-dot"
-              style={{
-                width: 6, height: 6, borderRadius: '50%',
-                background: '#2997ff', boxShadow: '0 0 8px #2997ff',
-              }}
-            />
-            Open to Relocation · Available Now
-          </span>
-        </motion.div>
-
         {/* Name */}
         <motion.h1
           variants={itemVariants}
@@ -89,12 +97,12 @@ export default function Hero() {
           variants={itemVariants}
           style={{
             fontSize: 'clamp(0.95rem, 2.5vw, 1.3rem)',
-            color: '#6e6e73', fontWeight: 400,
+            color: 'rgba(255,255,255,0.85)', fontWeight: 500,
             letterSpacing: '-0.01em', marginBottom: '3rem',
           }}
         >
           Full Stack Developer ·{' '}
-          <span className="grad-text" style={{ fontWeight: 600 }}>
+          <span className="grad-text" style={{ fontWeight: 700 }}>
             React · TypeScript · AWS
           </span>
         </motion.p>
