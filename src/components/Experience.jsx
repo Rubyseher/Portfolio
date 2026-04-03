@@ -2,11 +2,35 @@
 
 import { motion } from 'framer-motion';
 
+// ── Logo components ───────────────────────────────────────────────────────────
+
+function LogoImg({ src, alt, bg = 'rgba(255,255,255,0.04)', radius = 12 }) {
+  return (
+    <div style={{
+      width: 64, height: 64, borderRadius: radius, flexShrink: 0,
+      background: bg, overflow: 'hidden',
+      border: '1px solid rgba(255,255,255,0.1)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }}>
+      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    </div>
+  );
+}
+
+const LogoJPMC   = () => <LogoImg src="/logos/jpmc.png"   alt="JP Morgan Chase" bg="#7a4e2d" />;
+const LogoNextUp = () => <LogoImg src="/logos/nextup.png" alt="nextUp"          bg="#000"   radius={24} />;
+const LogoLBTC   = () => <LogoImg src="/logos/lbtc.png"   alt="Let's Be The Change" bg="#e8f4f8" radius={24} />;
+const LogoJGEC   = () => <LogoImg src="/logos/woc.png"    alt="JGEC Winter of Code" bg="#0d1b3e" radius={24} />;
+
+// ── Job data ──────────────────────────────────────────────────────────────────
+
 const JOBS = [
   {
+    logo: <LogoJPMC />,
     company: 'JP Morgan Chase & Co.',
     role: 'Full Stack Software Developer',
-    period: 'Jul 2024 – Present · Bangalore',
+    period: 'Jan 2024 – Present · Bangalore',
+    badge: null,
     bullets: [
       <>Spearheaded a <strong>3-member team</strong> to build a ReactJS–Flask GKP monitoring app, migrating dashboards to Grafana — <strong>reducing SRE checks by 75%</strong>, used daily by 30+ engineers.</>,
       <>Deployed a React monitoring dashboard on <strong>AWS ECS</strong>, consolidating Prometheus metrics and PostgreSQL data into a single platform used by <strong>40+ engineers</strong>.</>,
@@ -18,20 +42,11 @@ const JOBS = [
     dir: 'left',
   },
   {
-    company: 'JP Morgan Chase & Co.',
-    role: 'Software Engineer Program Intern',
-    period: 'Jan 2024 – Jul 2024 · Bangalore',
-    bullets: [
-      <>Collaborated in migrating a <strong>legacy Angular frontend</strong> to ReactJS with internal UI libraries, ensuring consistent UX as Angular approached end-of-support.</>,
-      <>Set up real-time <strong>Kubernetes alerts</strong> via Grafana, Prometheus &amp; Splunk, <strong>reducing issue response time by 50%</strong>.</>,
-    ],
-    tags: ['React.js', 'Angular', 'Grafana', 'Prometheus', 'Splunk', 'Kubernetes', 'Java'],
-    dir: 'right',
-  },
-  {
+    logo: <LogoJPMC />,
     company: 'JP Morgan Chase & Co.',
     role: 'Summer Analyst Intern',
     period: 'Jun 2023 – Aug 2023 · Bangalore',
+    badge: null,
     bullets: [
       <>Collaborated in migrating a <strong>legacy Angular frontend</strong> to ReactJS with Bootstrap and internal UI libraries, improving long-term maintainability.</>,
     ],
@@ -39,16 +54,44 @@ const JOBS = [
     dir: 'left',
   },
   {
-    company: 'JGEC Winter of Code · Team LBTC · nextUp',
+    logo: <LogoJGEC />,
+    company: 'JGEC Winter of Code',
     role: 'React Developer',
-    period: 'Jan 2021 – Aug 2021 · Remote',
+    period: 'Jul 2021 – Aug 2021 · Remote',
+    badge: 'Open Source',
     bullets: [
-      <>Built multiple React + Node.js applications for social good, open source, and startup projects across three different organisations.</>,
+      <>Contributed React and Python work as part of an open source programme, shipping features used by the community.</>,
     ],
-    tags: ['React.js', 'Node.js', 'Python'],
+    tags: ['React.js', 'Python'],
+    dir: 'right',
+  },
+  {
+    logo: <LogoLBTC />,
+    company: "Let's Be The Change · #TeamLBTC",
+    role: 'React Developer',
+    period: 'Apr 2021 – Jun 2021 · Remote',
+    badge: 'NGO',
+    bullets: [
+      <>Built React + Node.js features for an NGO platform supporting social good initiatives, contributing as a volunteer developer.</>,
+    ],
+    tags: ['React.js', 'Node.js'],
+    dir: 'left',
+  },
+  {
+    logo: <LogoNextUp />,
+    company: 'nextUp',
+    role: 'React Developer',
+    period: 'Jan 2021 – Mar 2021 · Remote',
+    badge: 'Startup',
+    bullets: [
+      <>Helped build the React + Node.js MVP for a friend's early-stage startup, contributing as a volunteer engineer.</>,
+    ],
+    tags: ['React.js', 'Node.js'],
     dir: 'right',
   },
 ];
+
+// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function Experience() {
   return (
@@ -90,13 +133,29 @@ export default function Experience() {
           >
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-              <div>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#2997ff', marginBottom: '0.35rem' }}>
-                  {job.company}
-                </p>
-                <p style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
-                  {job.role}
-                </p>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                {job.logo}
+                <div>
+                  <p style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
+                    {job.company}
+                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#6e6e73', letterSpacing: '0.01em' }}>
+                      {job.role}
+                    </p>
+                    {job.badge && (
+                      <span style={{
+                        fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.08em',
+                        textTransform: 'uppercase', color: '#6e6e73',
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: '100px', padding: '0.15rem 0.6rem',
+                      }}>
+                        {job.badge}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
               <span style={{
                 padding: '0.38rem 1rem',
