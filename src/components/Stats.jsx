@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const STATS = [
-  { val: 75,  suffix: '%', label: 'Reduction in SRE checks via Grafana monitoring dashboard' },
-  { val: 40,  suffix: '+', label: 'Engineers using her dashboards daily at JPMorgan Chase' },
-  { val: 720, suffix: '+', label: 'Engineering hours saved per year via Oracle APEX tool' },
-  { val: 900, suffix: '+', label: 'Participants competed against at Code for Good Hackathon' },
+  { val: 75,  suffix: '%', label: 'Reduction in SRE checks via Grafana monitoring dashboard', grad: 'linear-gradient(135deg, #e8834a, #c8392b)' },
+  { val: 40,  suffix: '+', label: 'Engineers using her dashboards daily at JPMorgan Chase',   grad: 'linear-gradient(135deg, #e05535, #c0396e)' },
+  { val: 720, suffix: '+', label: 'Engineering hours saved per year via Oracle APEX tool',     grad: 'linear-gradient(135deg, #c0396e, #8e44ad)' },
+  { val: 900, suffix: '+', label: 'Participants competed against at Code for Good Hackathon',  grad: 'linear-gradient(135deg, #9b59b6, #5b4fcf)' },
 ];
 
-function Counter({ val, suffix }) {
+function Counter({ val, suffix, grad }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const started = useRef(false);
@@ -41,8 +41,8 @@ function Counter({ val, suffix }) {
 
   return (
     <span ref={ref} style={{
-      fontSize: '3.2rem', fontWeight: 900, letterSpacing: '-0.05em',
-      background: 'linear-gradient(135deg, #2997ff, #bf5af2)',
+      fontSize: '4rem', fontWeight: 900, letterSpacing: '-0.05em',
+      background: grad,
       WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
       backgroundClip: 'text', lineHeight: 1, display: 'block',
     }}>
@@ -70,7 +70,7 @@ export default function Stats() {
             transition={{ duration: 0.85, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             whileHover={{ y: -5, borderColor: 'rgba(41,151,255,0.35)' }}
           >
-            <Counter val={s.val} suffix={s.suffix} />
+            <Counter val={s.val} suffix={s.suffix} grad={s.grad} />
             <p style={{ fontSize: '0.82rem', color: '#6e6e73', marginTop: '0.6rem', lineHeight: 1.4 }}>
               {s.label}
             </p>

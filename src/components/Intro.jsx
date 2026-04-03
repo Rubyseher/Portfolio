@@ -1,6 +1,9 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const LogoParticles = dynamic(() => import('./LogoParticles'), { ssr: false });
 
 const WORDS = [
   { text: 'I', highlight: false },
@@ -70,11 +73,15 @@ export default function Intro() {
     <div
       id="intro"
       ref={containerRef}
-      style={{ padding: '10rem 3rem 8rem', maxWidth: 1160, margin: '0 auto' }}
+      style={{
+        padding: '10rem 3rem 8rem', maxWidth: 1160, margin: '0 auto',
+        display: 'flex', alignItems: 'center', gap: '4rem',
+      }}
     >
       <p
         style={{
-          fontSize: 'clamp(1.8rem, 4.5vw, 3.8rem)',
+          flex: '1 1 0',
+          fontSize: 'clamp(1.3rem, 3vw, 2.6rem)',
           fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.03em',
           display: 'flex', flexWrap: 'wrap', gap: '0 0.28em', alignItems: 'baseline',
         }}
@@ -106,6 +113,10 @@ export default function Intro() {
           )
         )}
       </p>
+
+      <div style={{ flex: '0 0 280px', display: 'flex', justifyContent: 'center' }}>
+        <LogoParticles />
+      </div>
     </div>
   );
 }
