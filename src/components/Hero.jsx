@@ -53,7 +53,7 @@ export default function Hero() {
                 background: bg,
                 border: `1px solid ${border}`,
                 borderRadius: '50%',
-                boxShadow: `0 0 24px ${color}33`,
+                boxShadow: `0 0 18px ${color}66, 0 0 48px ${color}33, 0 0 80px ${color}1a`,
                 backdropFilter: 'blur(4px)',
                 display: 'flex',
               }}

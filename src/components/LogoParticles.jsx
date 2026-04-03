@@ -39,11 +39,18 @@ function drawJS(ctx) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
+  // circle outline
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.arc(W / 2, H / 2, 118, 0, Math.PI * 2);
+  ctx.stroke();
+  // JS text bottom-right aligned like the real logo
   ctx.fillStyle = '#fff';
-  ctx.font = 'bold 180px monospace';
+  ctx.font = 'bold 110px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('JS', W / 2, H / 2 + 10);
+  ctx.fillText('JS', W / 2 + 14, H / 2 + 18);
 }
 
 function drawAWS(ctx) {
@@ -73,16 +80,15 @@ function drawTS(ctx) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
-  // rounded square background outline
+  // circle outline
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 10;
-  const pad = 28;
   ctx.beginPath();
-  ctx.roundRect(pad, pad, W - pad * 2, H - pad * 2, 28);
+  ctx.arc(W / 2, H / 2, 118, 0, Math.PI * 2);
   ctx.stroke();
-  // TS text inside
+  // TS text centered like the real logo
   ctx.fillStyle = '#fff';
-  ctx.font = 'bold 120px monospace';
+  ctx.font = 'bold 110px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('TS', W / 2, H / 2 + 6);

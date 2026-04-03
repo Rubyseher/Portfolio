@@ -15,9 +15,15 @@ function MainParticles() {
     const positions = new Float32Array(N * 3);
     const colors    = new Float32Array(N * 3);
 
+    const CLEAR_R2 = 38 * 38; // clear radius around center (name area)
     for (let i = 0; i < N; i++) {
-      positions[i * 3]     = (Math.random() - 0.5) * 240;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 240;
+      let px, py;
+      do {
+        px = (Math.random() - 0.5) * 240;
+        py = (Math.random() - 0.5) * 240;
+      } while (px * px + py * py < CLEAR_R2);
+      positions[i * 3]     = px;
+      positions[i * 3 + 1] = py;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
 
       const c = new THREE.Color(PALETTE[Math.floor(Math.random() * PALETTE.length)]);
