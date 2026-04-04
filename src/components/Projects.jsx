@@ -239,10 +239,10 @@ function ShadeMatchSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
 
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.10], [0, 1]);
-  const headerY       = useTransform(scrollYProgress, [0, 0.10], [30, 0]);
-  const textOpacity   = useTransform(scrollYProgress, [0.08, 0.22], [0, 1]);
-  const textY         = useTransform(scrollYProgress, [0.08, 0.22], [24, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
+  const headerY       = useTransform(scrollYProgress, [0, 0.06], [20, 0]);
+  const textOpacity   = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
+  const textY         = useTransform(scrollYProgress, [0, 0.06], [16, 0]);
 
   const lidAngle      = useTransform(scrollYProgress, [0.22, 0.62], [-86, 20]);
   const screenOpacity = useTransform(scrollYProgress, [0.44, 0.60], [0, 1]);
@@ -253,9 +253,9 @@ function ShadeMatchSection() {
         position: 'sticky', top: 0, height: '100vh',
         background: '#000', overflow: 'hidden',
         display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        gap: '1.8rem',
-        padding: '0 4rem',
+        alignItems: 'center', justifyContent: 'flex-start',
+        gap: '1rem',
+        padding: '4rem 4rem 2rem',
       }}>
 
         {/* "Things I've built" */}
@@ -264,7 +264,7 @@ function ShadeMatchSection() {
             Projects
           </p>
           <h2 style={{ fontSize: 'clamp(2.4rem, 5vw, 4.2rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1 }}>
-            Things I&apos;ve <span className="grad-text">built</span>
+            Solutions I&apos;ve <span className="grad-text">made</span>
           </h2>
         </motion.div>
 

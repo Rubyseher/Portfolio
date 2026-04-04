@@ -43,7 +43,7 @@ export default function SkillsCarousel() {
   const iconsOpacity = useTransform(scrollYProgress, [0.5, 0.82], [1, 0.08]);
   const iconsScale   = useTransform(scrollYProgress, [0.5, 0.82], [1, 1.18]);
   const textScale    = useTransform(scrollYProgress, [0.45, 0.82], [1, 1.22]);
-  const textOpacity  = useTransform(scrollYProgress, [0.08, 0.3], [0, 1]);
+  const textOpacity  = useTransform(scrollYProgress, [0.08, 0.3, 0.50, 0.65], [0, 1, 1, 0]);
   const containerScale   = useTransform(scrollYProgress, [0.5, 0.88], [1, 8]);
   const containerOpacity = useTransform(scrollYProgress, [0.78, 0.88], [1, 0]);
 
@@ -109,7 +109,7 @@ export default function SkillsCarousel() {
                 Skills that{' '}
                 <span className="grad-text">ship</span>
               </h2>
-              <p style={{ fontSize: '1rem', color: '#6e6e73', lineHeight: 1.6, maxWidth: 380 }}>
+              <p style={{ fontSize: '1rem', color: '#6e6e73', lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
                 From frontend to cloud infrastructure — full stack, end to end.
               </p>
             </motion.div>
