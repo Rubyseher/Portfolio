@@ -71,7 +71,7 @@ export default function Stats() {
             whileHover={{ y: -5, borderColor: 'rgba(41,151,255,0.35)' }}
           >
             <Counter val={s.val} suffix={s.suffix} grad={s.grad} />
-            <p style={{ fontSize: '0.82rem', color: '#6e6e73', marginTop: '0.6rem', lineHeight: 1.4 }}>
+            <p style={{ fontSize: '0.82rem', color: '#6e6e73', marginTop: '1.1rem', lineHeight: 1.6 }}>
               {s.label}
             </p>
           </motion.div>
