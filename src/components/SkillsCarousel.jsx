@@ -51,9 +51,9 @@ export default function SkillsCarousel() {
     <div
       id="skills"
       ref={outerRef}
-      style={{ height: '200vh', position: 'relative' }}
+      style={{ height: '200vh', position: 'relative', background: '#000' }}
     >
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden', background: '#000' }}>
         <motion.div style={{
           scale: containerScale,
           opacity: containerOpacity,
