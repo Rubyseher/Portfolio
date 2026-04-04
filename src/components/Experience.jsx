@@ -84,7 +84,7 @@ const JOBS = [
     period: 'Jan 2021 – Mar 2021 · Remote',
     badge: 'Startup',
     bullets: [
-      <>Helped build the React + Node.js MVP for a friend's early-stage startup, contributing as a volunteer engineer.</>,
+      <>Helped build the React + Node.js MVP for a friend&apos;s early-stage startup, contributing as a volunteer engineer.</>,
     ],
     tags: ['React.js', 'Node.js'],
     dir: 'right',
