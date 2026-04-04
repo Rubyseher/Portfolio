@@ -242,76 +242,72 @@ function ShadeMatchSection() {
   // Staggered scroll-reveal: each block appears one after another
   const headerOpacity = useTransform(scrollYProgress, [0,    0.06], [0, 1]);
   const headerY       = useTransform(scrollYProgress, [0,    0.06], [20, 0]);
-  const labelOpacity  = useTransform(scrollYProgress, [0.04, 0.12], [0, 1]);
-
-  const labelY        = useTransform(scrollYProgress, [0.04, 0.12], [18, 0]);
-  const titleOpacity  = useTransform(scrollYProgress, [0.08, 0.16], [0, 1]);
-  const titleY        = useTransform(scrollYProgress, [0.08, 0.16], [18, 0]);
-  const descOpacity   = useTransform(scrollYProgress, [0.13, 0.21], [0, 1]);
-  const descY         = useTransform(scrollYProgress, [0.13, 0.21], [18, 0]);
-  const tagsOpacity   = useTransform(scrollYProgress, [0.18, 0.26], [0, 1]);
-  const tagsY         = useTransform(scrollYProgress, [0.18, 0.26], [14, 0]);
-  const linkOpacity   = useTransform(scrollYProgress, [0.22, 0.30], [0, 1]);
-  const linkY         = useTransform(scrollYProgress, [0.22, 0.30], [14, 0]);
+  const labelOpacity  = useTransform(scrollYProgress, [0,    0.05], [0, 1]);
+  const labelY        = useTransform(scrollYProgress, [0,    0.05], [18, 0]);
+  const titleOpacity  = useTransform(scrollYProgress, [0.02, 0.08], [0, 1]);
+  const titleY        = useTransform(scrollYProgress, [0.02, 0.08], [18, 0]);
+  const descOpacity   = useTransform(scrollYProgress, [0.05, 0.12], [0, 1]);
+  const descY         = useTransform(scrollYProgress, [0.05, 0.12], [18, 0]);
+  const tagsOpacity   = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
+  const tagsY         = useTransform(scrollYProgress, [0.08, 0.15], [14, 0]);
+  const linkOpacity   = useTransform(scrollYProgress, [0.11, 0.18], [0, 1]);
+  const linkY         = useTransform(scrollYProgress, [0.11, 0.18], [14, 0]);
 
   const lidAngle      = useTransform(scrollYProgress, [0.32, 0.68], [-86, 20]);
   const screenOpacity = useTransform(scrollYProgress, [0.52, 0.66], [0, 1]);
 
   return (
-    <div ref={ref} style={{ height: '350vh', position: 'relative', background: '#000' }}>
-      <div style={{
-        position: 'sticky', top: 0, height: '100vh',
-        background: '#000', overflow: 'hidden',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'flex-start',
-        gap: '0.4rem',
-        padding: '2.5rem 4rem 1rem',
-      }}>
+    <div ref={ref} style={{ height: '500vh', position: 'relative', background: '#000' }}>
 
-        {/* "Things I've built" */}
-        <motion.div style={{ opacity: headerOpacity, y: headerY, textAlign: 'center', padding: '1.5rem 0 2.5rem' }}>
-          <p style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#2997ff', fontWeight: 600, marginBottom: '0.5rem' }}>
+      {/* ── Phase 1: Text fills full viewport ── */}
+      <div style={{ position: 'sticky', top: 0, height: '100vh', background: '#000', overflow: 'hidden',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        padding: '0 4rem',
+      }}>
+        <motion.div style={{ opacity: headerOpacity, y: headerY, textAlign: 'center', marginBottom: '4rem' }}>
+          <p style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#2997ff', fontWeight: 600, marginBottom: '0.8rem' }}>
             Projects
           </p>
-          <h2 style={{ fontSize: 'clamp(2.4rem, 5vw, 4.2rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1 }}>
+          <h2 style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1 }}>
             Solutions I&apos;ve <span className="grad-text">made</span>
           </h2>
         </motion.div>
 
-        {/* ShadeMatch text — each block staggered */}
-        <div style={{ textAlign: 'center', maxWidth: 560 }}>
-          <motion.p style={{ opacity: labelOpacity, y: labelY, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.14em', color: '#2997ff', fontWeight: 600, marginBottom: '0.4rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: 600 }}>
+          <motion.p style={{ opacity: labelOpacity, y: labelY, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.14em', color: '#2997ff', fontWeight: 600, marginBottom: '0.8rem' }}>
             01 — ShadeMatch
           </motion.p>
-          <motion.h3 style={{ opacity: titleOpacity, y: titleY, fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '0.9rem' }}>
+          <motion.h3 style={{ opacity: titleOpacity, y: titleY, fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.4rem' }}>
             Your wardrobe,<br />finally coordinated.
           </motion.h3>
-          <motion.p style={{ opacity: descOpacity, y: descY, fontSize: '1rem', color: '#86868b', lineHeight: 1.7, marginBottom: '1.2rem' }}>
+          <motion.p style={{ opacity: descOpacity, y: descY, fontSize: '1.05rem', color: '#86868b', lineHeight: 1.8, marginBottom: '1.8rem' }}>
             Most people own clothes that never get worn — not because they don&apos;t fit, but because nothing matches. ShadeMatch extracts colors from any clothing photo and generates AI-driven outfit combinations, with links to anything missing.
           </motion.p>
-          <motion.div style={{ opacity: tagsOpacity, y: tagsY, display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center', marginBottom: '1rem' }}>
+          <motion.div style={{ opacity: tagsOpacity, y: tagsY, display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', marginBottom: '1.6rem' }}>
             {['React.js', 'AI/ML', 'Color Extraction', 'Deployed'].map(t => (
               <span key={t} className="tag-pill">{t}</span>
             ))}
           </motion.div>
           <motion.a
-            style={{ opacity: linkOpacity, y: linkY, fontSize: '0.9rem', color: '#2997ff', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            style={{ opacity: linkOpacity, y: linkY, fontSize: '0.95rem', color: '#2997ff', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
             href="https://github.com/Rubyseher/ShadeMatch" target="_blank" rel="noopener noreferrer"
-            onMouseEnter={e => (e.currentTarget.style.gap = '0.75rem')}
+            onMouseEnter={e => (e.currentTarget.style.gap = '0.8rem')}
             onMouseLeave={e => (e.currentTarget.style.gap = '0.4rem')}
           >View on GitHub →</motion.a>
         </div>
+      </div>
 
-        <div style={{ height: '1.8rem' }} />
-
-        {/* MacBook — centered, large */}
+      {/* ── Phase 2: Laptop fills full viewport ── */}
+      <div style={{ position: 'sticky', top: 0, height: '100vh', background: '#000', overflow: 'hidden',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        padding: '0 4rem',
+      }}>
         <MacBook screenshot="/logos/shade-match.png" lidAngle={lidAngle} screenOpacity={screenOpacity} />
-
-        {/* Progress dot */}
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '3rem' }}>
           {[0,1].map(i => <div key={i} style={{ width: i===0?22:6, height:6, borderRadius:3, background: i===0?'#2997ff':'rgba(255,255,255,0.2)' }} />)}
         </div>
       </div>
+
     </div>
   );
 }
