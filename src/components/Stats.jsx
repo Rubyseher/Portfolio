@@ -53,7 +53,7 @@ function Counter({ val, suffix, grad }) {
 
 export default function Stats() {
   return (
-    <section style={{ padding: '6rem 3rem', maxWidth: 1200, margin: '0 auto' }}>
+    <section style={{ padding: '2rem 3rem 6rem', maxWidth: 1200, margin: '0 auto' }}>
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -62,13 +62,12 @@ export default function Stats() {
         {STATS.map((s, i) => (
           <motion.div
             key={i}
-            className="glass-card"
             style={{ padding: '2rem 1.75rem', borderRadius: 20, textAlign: 'center' }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, margin: '-80px' }}
             transition={{ duration: 0.85, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-            whileHover={{ y: -5, borderColor: 'rgba(41,151,255,0.35)' }}
+            whileHover={{ y: -5 }}
           >
             <Counter val={s.val} suffix={s.suffix} grad={s.grad} />
             <p style={{ fontSize: '0.82rem', color: '#6e6e73', marginTop: '1.1rem', lineHeight: 1.6 }}>
