@@ -12,14 +12,13 @@ function ShadeMatchSection() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
   const headerY       = useTransform(scrollYProgress, [0, 0.08], [20, 0]);
 
-  // Lid: -85 = nearly closed, 18 = open ~105°
-  const lidAngle      = useTransform(scrollYProgress, [0.07, 0.44], [-85, 18]);
-  const screenOpacity = useTransform(scrollYProgress, [0.26, 0.42], [0, 1]);
+  // Text fades in first
+  const textOpacity = useTransform(scrollYProgress, [0.06, 0.20], [0, 1]);
+  const textY       = useTransform(scrollYProgress, [0.06, 0.20], [30, 0]);
 
-  // Laptop starts centered (x=-280), moves right to reveal text
-  const laptopX  = useTransform(scrollYProgress, [0.44, 0.60], [-280, 0]);
-  const textOpacity = useTransform(scrollYProgress, [0.50, 0.64], [0, 1]);
-  const textX       = useTransform(scrollYProgress, [0.50, 0.64], [-50, 0]);
+  // Lid: -85 = nearly closed, 18 = open ~105°
+  const lidAngle      = useTransform(scrollYProgress, [0.22, 0.58], [-85, 18]);
+  const screenOpacity = useTransform(scrollYProgress, [0.42, 0.56], [0, 1]);
 
   return (
     <div ref={ref} style={{ height: '300vh', position: 'relative', background: '#000' }}>
@@ -29,9 +28,10 @@ function ShadeMatchSection() {
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
         padding: '0 5rem',
+        gap: '1.5rem',
       }}>
         {/* Label + title */}
-        <motion.div style={{ opacity: headerOpacity, y: headerY, textAlign: 'center', marginBottom: '0.25rem' }}>
+        <motion.div style={{ opacity: headerOpacity, y: headerY, textAlign: 'center' }}>
           <p style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.16em', color: '#2997ff', fontWeight: 600, marginBottom: '0.4rem' }}>
             Projects
           </p>
@@ -40,96 +40,86 @@ function ShadeMatchSection() {
           </h2>
         </motion.div>
 
-        {/* Row: text left, laptop right — both vertically centered */}
-        <div style={{ display: 'flex', alignItems: 'center', width: '100%', maxWidth: 1200, gap: '3rem', marginTop: '1rem' }}>
+        {/* Center: project text */}
+        <motion.div style={{ opacity: textOpacity, y: textY, textAlign: 'center', maxWidth: 620 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.7rem', justifyContent: 'center', marginBottom: '0.7rem' }}>
+            <span style={{
+              fontSize: '2.6rem', fontWeight: 900, letterSpacing: '-0.06em', lineHeight: 1,
+              background: 'linear-gradient(135deg, #2997ff, #bf5af2)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>01</span>
+            <h3 style={{ fontSize: '1.35rem', fontWeight: 700, letterSpacing: '-0.03em' }}>ShadeMatch</h3>
+          </div>
+          <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.35, color: '#f5f5f7', marginBottom: '0.7rem' }}>
+            Your wardrobe, finally coordinated.
+          </p>
+          <p style={{ fontSize: '0.88rem', color: '#6e6e73', lineHeight: 1.7, marginBottom: '0.6rem' }}>
+            Most people buy clothes that never get worn — not because they don&apos;t fit, but because nothing matches them.
+          </p>
+          <p style={{ fontSize: '0.88rem', color: '#a1a1aa', lineHeight: 1.7, marginBottom: '1rem' }}>
+            Upload a photo of any clothing item. ShadeMatch extracts its colors, finds complementary combinations from your wardrobe, and links you to anything missing.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', justifyContent: 'center', marginBottom: '0.9rem' }}>
+            {['React.js', 'AI/ML', 'Color Extraction', 'Deployed'].map(t => (
+              <span key={t} className="tag-pill">{t}</span>
+            ))}
+          </div>
+          <a href="https://github.com/Rubyseher/ShadeMatch" target="_blank" rel="noopener noreferrer"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: '#2997ff', fontWeight: 600, textDecoration: 'none' }}
+            onMouseEnter={e => (e.currentTarget.style.gap = '0.8rem')}
+            onMouseLeave={e => (e.currentTarget.style.gap = '0.45rem')}
+          >View on GitHub →</a>
+        </motion.div>
 
-          {/* Left: text */}
-          <motion.div style={{ opacity: textOpacity, x: textX, flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.7rem', marginBottom: '0.9rem' }}>
-              <span style={{
-                fontSize: '2.6rem', fontWeight: 900, letterSpacing: '-0.06em', lineHeight: 1,
-                background: 'linear-gradient(135deg, #2997ff, #bf5af2)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>01</span>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, letterSpacing: '-0.03em' }}>ShadeMatch</h3>
-            </div>
-
-            <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.35, color: '#f5f5f7', marginBottom: '0.9rem' }}>
-              Your wardrobe, finally coordinated.
-            </p>
-            <p style={{ fontSize: '0.9rem', color: '#6e6e73', lineHeight: 1.75, marginBottom: '0.8rem' }}>
-              Most people buy clothes that never get worn — not because they don&apos;t fit, but because nothing matches them.
-            </p>
-            <p style={{ fontSize: '0.9rem', color: '#a1a1aa', lineHeight: 1.75, marginBottom: '1.4rem' }}>
-              Upload a photo of any clothing item. ShadeMatch extracts its colors, finds complementary combinations from your wardrobe, and links you to anything missing.
-            </p>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1rem' }}>
-              {['React.js', 'AI/ML', 'Color Extraction', 'Deployed'].map(t => (
-                <span key={t} className="tag-pill">{t}</span>
-              ))}
-            </div>
-
-            <a href="https://github.com/Rubyseher/ShadeMatch" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.85rem', color: '#2997ff', fontWeight: 600, textDecoration: 'none' }}
-              onMouseEnter={e => (e.currentTarget.style.gap = '0.8rem')}
-              onMouseLeave={e => (e.currentTarget.style.gap = '0.45rem')}
-            >View on GitHub →</a>
-          </motion.div>
-
-          {/* Right: laptop */}
-          <motion.div style={{ x: laptopX, flex: '0 0 auto' }}>
-            <div style={{ perspective: 1100, perspectiveOrigin: '50% -30%' }}>
-              <div style={{ width: 520, transform: 'rotateX(-20deg)', transformStyle: 'preserve-3d' }}>
-                <motion.div style={{
-                  width: 520, height: 325,
-                  transformOrigin: '50% 100%',
-                  rotateX: lidAngle,
-                  transformStyle: 'preserve-3d',
-                  position: 'relative', zIndex: 2,
-                }}>
-                  {/* Shell back */}
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: 'linear-gradient(165deg, #3e3e3e, #252525)',
-                    borderRadius: '14px 14px 0 0',
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateX(180deg)',
-                  }}>
-                    <div style={{
-                      position: 'absolute', top: '42%', left: '50%', transform: 'translate(-50%,-50%)',
-                      width: 34, height: 34, borderRadius: '50%',
-                      border: '1px solid rgba(255,255,255,0.07)',
-                    }} />
-                  </div>
-                  {/* Screen */}
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: '#0a0a0a', borderRadius: '14px 14px 0 0',
-                    border: '8px solid #2c2c2c', overflow: 'hidden',
-                    backfaceVisibility: 'hidden',
-                  }}>
-                    <div style={{
-                      position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)',
-                      width: 7, height: 7, borderRadius: '50%', background: '#2a2a2a', zIndex: 10,
-                    }} />
-                    <motion.div style={{ opacity: screenOpacity, position: 'absolute', inset: 0 }}>
-                      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                        <Image src="/logos/shade-match.png" alt="ShadeMatch" fill style={{ objectFit: 'cover', objectPosition: 'top' }} />
-                      </div>
-                    </motion.div>
+        {/* Center: laptop below text */}
+        <div style={{ perspective: 1100, perspectiveOrigin: '50% -30%' }}>
+          <div style={{ width: 520, transform: 'rotateX(-20deg)', transformStyle: 'preserve-3d' }}>
+            <motion.div style={{
+              width: 520, height: 295,
+              transformOrigin: '50% 100%',
+              rotateX: lidAngle,
+              transformStyle: 'preserve-3d',
+              position: 'relative', zIndex: 2,
+            }}>
+              {/* Shell back */}
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(165deg, #3e3e3e, #252525)',
+                borderRadius: '14px 14px 0 0',
+                backfaceVisibility: 'hidden',
+                transform: 'rotateX(180deg)',
+              }}>
+                <div style={{
+                  position: 'absolute', top: '42%', left: '50%', transform: 'translate(-50%,-50%)',
+                  width: 34, height: 34, borderRadius: '50%',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                }} />
+              </div>
+              {/* Screen */}
+              <div style={{
+                position: 'absolute', inset: 0,
+                background: '#0a0a0a', borderRadius: '14px 14px 0 0',
+                border: '8px solid #2c2c2c', overflow: 'hidden',
+                backfaceVisibility: 'hidden',
+              }}>
+                <div style={{
+                  position: 'absolute', top: 5, left: '50%', transform: 'translateX(-50%)',
+                  width: 7, height: 7, borderRadius: '50%', background: '#2a2a2a', zIndex: 10,
+                }} />
+                <motion.div style={{ opacity: screenOpacity, position: 'absolute', inset: 0 }}>
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image src="/logos/shade-match.png" alt="ShadeMatch" fill style={{ objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
                 </motion.div>
-                <div style={{ width: 520, height: 10, background: '#2a2a2a' }} />
-                <div style={{ width: 554, height: 10, background: '#1e1e1e', borderRadius: '0 0 10px 10px', margin: '0 auto', boxShadow: '0 40px 80px rgba(0,0,0,0.9)' }} />
               </div>
-            </div>
-          </motion.div>
-
+            </motion.div>
+            <div style={{ width: 520, height: 10, background: '#2a2a2a' }} />
+            <div style={{ width: 554, height: 10, background: '#1e1e1e', borderRadius: '0 0 10px 10px', margin: '0 auto', boxShadow: '0 40px 80px rgba(0,0,0,0.9)' }} />
+          </div>
         </div>
 
         {/* Dot: first of 2 */}
-        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '2rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           {[0, 1].map(i => (
             <div key={i} style={{ width: i === 0 ? 22 : 6, height: 6, borderRadius: 3, background: i === 0 ? '#2997ff' : 'rgba(255,255,255,0.18)' }} />
           ))}
