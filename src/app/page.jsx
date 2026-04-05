@@ -10,6 +10,7 @@ import Projects      from '@/components/Projects';
 import Achievements  from '@/components/Achievements';
 import Testimonials  from '@/components/Testimonials';
 import Contact       from '@/components/Contact';
+import GlobeSection  from '@/components/GlobeSection';
 import Footer        from '@/components/Footer';
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
         <div className="section-divider" />
         <Testimonials />
         <div className="section-divider" />
+        <GlobeSection />
         <Contact />
       </main>
       <Footer />

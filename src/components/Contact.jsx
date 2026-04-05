@@ -46,12 +46,10 @@ const LINKS = [
 
 export default function Contact() {
   return (
-    <section id="contact" style={{ padding: '8rem 3rem', maxWidth: 1200, margin: '0 auto' }}>
+    <section id="contact" style={{ padding: '8rem 3rem', maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
       <motion.div
         style={{
           position: 'relative', padding: '6rem 3rem', textAlign: 'center',
-          background: 'linear-gradient(135deg, rgba(41,151,255,0.06), rgba(191,90,242,0.06))',
-          border: '1px solid rgba(41,151,255,0.12)',
           borderRadius: 36, overflow: 'hidden',
         }}
         initial={{ opacity: 0, y: 50 }}
