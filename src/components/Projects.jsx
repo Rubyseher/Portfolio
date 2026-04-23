@@ -280,8 +280,8 @@ function ShadeMatchSection() {
           <motion.h3 style={{ opacity: titleOpacity, y: titleY, fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '1.4rem' }}>
             Your wardrobe,<br />finally coordinated.
           </motion.h3>
-          <motion.p style={{ opacity: descOpacity, y: descY, fontSize: '1.05rem', color: '#86868b', lineHeight: 1.8, marginBottom: '1.8rem' }}>
-            Most people own clothes that never get worn — not because they don&apos;t fit, but because nothing matches. ShadeMatch extracts colors from any clothing photo and generates AI-driven outfit combinations, with links to anything missing.
+          <motion.p style={{ opacity: descOpacity, y: descY, fontSize: '1.05rem', color: '#acacad', lineHeight: 1.8, marginBottom: '1.8rem' }}>
+            Most people own clothes that never get worn, not because they don&apos;t fit, but because nothing matches. ShadeMatch extracts colors from any clothing photo and generates AI-driven outfit combinations, with links to anything missing.
           </motion.p>
           <motion.div style={{ opacity: tagsOpacity, y: tagsY, display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', marginBottom: '1.6rem' }}>
             {['React.js', 'AI/ML', 'Color Extraction', 'Deployed'].map(t => (
@@ -335,7 +335,7 @@ function OvenSection() {
         <h3 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: '0.9rem' }}>
           Your kitchen,<br />in your pocket.
         </h3>
-        <p style={{ fontSize: '1rem', color: '#86868b', lineHeight: 1.7, marginBottom: '1.2rem' }}>
+        <p style={{ fontSize: '1rem', color: '#acacad', lineHeight: 1.7, marginBottom: '1.2rem' }}>
           Smart ovens are only smart when you&apos;re standing next to them. This React Native app streams live oven status over WebSockets and fires a push notification the moment your food hits temperature — on iOS and Android.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', justifyContent: 'center', marginBottom: '1rem' }}>
