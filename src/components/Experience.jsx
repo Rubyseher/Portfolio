@@ -34,8 +34,6 @@ const JOBS = [
     bullets: [
       <>Spearheaded a <strong>3-member team</strong> to build a ReactJS–Flask GKP monitoring app, migrating dashboards to Grafana — <strong>reducing SRE checks by 75%</strong>, used daily by 30+ engineers.</>,
       <>Deployed a React monitoring dashboard on <strong>AWS ECS</strong>, consolidating Prometheus metrics and PostgreSQL data into a single platform used by <strong>40+ engineers</strong>.</>,
-      <>Built a React–Python GKP resource optimization tool — <strong>won 1st place, Code-A-Thon 2025</strong>.</>,
-      <>Developed a Python script eliminating recurring <strong>500GB snapshot overflows</strong>, reducing storage costs.</>,
       <>Built an Oracle APEX UI enabling 50 employees to self-service pod cleanup, <strong>cutting time 5× and saving 720 hr/yr</strong>. Resolved a production outage in under 1 hour.</>,
     ],
     tags: ['React.js', 'TypeScript', 'Python', 'Flask', 'AWS ECS', 'Docker', 'Grafana', 'Prometheus', 'Kubernetes', 'PostgreSQL'],
